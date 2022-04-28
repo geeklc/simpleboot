@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<configuration status="WARN">
+    <!--全局参数-->
+    <Properties>
+        <!--
+            %d ：时间 %d{yyyy-MM-dd HH:mm:ss,SSS} 输出格式为：2012-11-02 14:34:02,781
+            %5p
+            %level：  输出等级 TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+            %highlight{xxx} ：xxx将会带有颜色样式, 并且和Level相关, 一般用于debug调试信息使用
+            %c{number} ： 控制类型的长度
+            %L ：     行数
+            %m ： 日志内容
+            %n ： 换行
+            -->
+        <Property name="pattern">%d{yyyy-MM-dd HH:mm:ss,SSS} %5p %c{-1}:%L - %m%n</Property>
+        <Property name="filePath">./logs</Property>
+    </Properties>
+    <Loggers>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.mybatis" level="INFO"/>
+        <logger name="io.lettuce" level="INFO"/>
+        <logger name="io.netty" level="INFO"/>
+        <logger name="org.apache" level="INFO"/>
+        <logger name="com.alibaba.druid" level="INFO"/>
+        <logger name="java.sql" level="INFO"/>
+        <logger name="org.apache.mina" level="WARN" additivity="true"/>
+        <logger name="org.hibernate" level="INFO"/>
+
+        <Root level="DEBUG">   <!--设置level可以定义全局日志级别-->
+            <AppenderRef ref="console"></AppenderRef>
+            <AppenderRef ref="rollingFileDebug"></AppenderRef>
+            <AppenderRef ref="rollingFileInfo"></AppenderRef>
+            <AppenderRef ref="rollingFileError"></AppenderRef>
+        </Root>
+    </Loggers>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <!--控制台只输出level及以上级别的信息-->
+            <PatternLayout>
+                <Pattern>${pattern}</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <!--==============debug日志配置====================-->
+        <RollingFile name="rollingFileDebug"
+                     fileName="${filePath}/server_debug.log"
+                     filePattern="${filePath}/server_debug_%d{yyyy-MM-dd}.log">
+            <!--只打印DEBUG级别的日志-->
+            <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="ACCEPT"/>
+            <PatternLayout>
+                <Pattern>${pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- 日志保留策略，配置只保留30天 -->
+            <DefaultRolloverStrategy>
+                <Delete basePath="${filePath}/" maxDepth="1">
+                    <IfFileName glob="server_debug_*.log" />
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!--==============info日志配置====================-->
+        <RollingFile name="rollingFileInfo"
+                     fileName="${filePath}/server_info.log"
+                     filePattern="${filePath}/server_info_%d{yyyy-MM-dd}.log">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+
+            <PatternLayout>
+                <Pattern>${pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- 日志保留策略，配置只保留30天 -->
+            <DefaultRolloverStrategy>
+                <Delete basePath="${filePath}/" maxDepth="1">
+                    <IfFileName glob="server_info_*.log" />
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!--==============error日志配置====================-->
+        <RollingFile name="rollingFileError"
+                     fileName="${filePath}/server_error.log"
+                     filePattern="${filePath}/server_error_%d{yyyy-MM-dd}.log">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>${pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- 日志保留策略，配置只保留30天 -->
+            <DefaultRolloverStrategy>
+                <Delete basePath="${filePath}/" maxDepth="1">
+                    <IfFileName glob="server_error_*.log" />
+                    <IfLastModified age="30d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+</configuration>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ch</groupId>
+        <artifactId>framework-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>./framework-parent</relativePath>
+    </parent>
+
+    <groupId>com.ch</groupId>
+    <artifactId>framework-main</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>framework-main</name>
+    <description>springcloud项目</description>
+    <packaging>pom</packaging>
+
+
+    <properties>
+    </properties>
+
+    <modules>
+        <module>framework-common</module>
+        <module>framework-parent</module>
+        <module>framework-mvc</module>
+        <module>test</module>
+    </modules>
+
+
+
+
+</project>

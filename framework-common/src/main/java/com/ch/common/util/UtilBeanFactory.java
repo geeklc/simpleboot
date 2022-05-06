@@ -27,7 +27,6 @@ public class UtilBeanFactory implements ApplicationContextAware {
      * @return
      */
     public static ApplicationContext getApplicationContext(){
-//        Assert.notNull( APPLICATION_CONTEXT , "应用上下文对象没有初始化" );
         return APPLICATION_CONTEXT ;
     }
 

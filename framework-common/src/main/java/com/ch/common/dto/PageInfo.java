@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @Author : lichong
  * @description : 分页信息
@@ -13,12 +15,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageInfo {
+public class PageInfo<T> {
 
     /**
      * 当前页数
      */
-    public int currentPage;
+    public int pageNum;
 
     /**
      * 总页数
@@ -36,4 +38,8 @@ public class PageInfo {
     public Long totalRows;
 
 
+    /**
+     * 数据列表
+     */
+    private List<T> list;
 }

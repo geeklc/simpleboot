@@ -1,8 +1,8 @@
 package com.ch.common.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.util.List;
 
 /**
  * @Author : lichong
@@ -11,15 +11,12 @@ import java.util.List;
  * @Modified By :
  **/
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class ResultPage<T> extends ResultStatus {
 
     /**
      * 分页信息
      */
-    private PageInfo pageInfo;
+    private PageInfo<T> pageInfo;
 
-    /**
-     * 数据列表
-     */
-    private List<T> list;
 }

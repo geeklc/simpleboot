@@ -18,4 +18,30 @@ public interface AppConstants {
      * 默认日期格式
      */
     String DATE_PATTERN = "yyyy-MM-dd";
+
+    /**
+     * 删除标识字段
+     */
+    String DEL_FILED = "delFlag";
+
+    /**
+     * 删除值
+     */
+    Integer DEL_VALUE = 1;
+
+    /**
+     * 未被删除值
+     */
+    Integer NOT_DEL_VALUE = 0;
+
+    /**
+     * 默认分页大小
+     */
+    int DEFAULT_PAGE_SIZE = 10;
+
+    /**
+     * 默认分页数
+     */
+    int DEFAULT_PAGE_NUM = 1;
+
 }

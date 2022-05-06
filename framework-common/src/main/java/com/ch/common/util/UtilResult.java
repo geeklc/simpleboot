@@ -1,15 +1,14 @@
 package com.ch.common.util;
 
 
-import com.alibaba.fastjson2.JSON;
 import com.ch.common.base.BaseResEnum;
 import com.ch.common.base.ResStatusInterface;
+import com.ch.common.common.AppConstants;
 import com.ch.common.dto.PageInfo;
 import com.ch.common.dto.ResultData;
 import com.ch.common.dto.ResultPage;
 import com.ch.common.dto.ResultStatus;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,14 +17,14 @@ import java.util.List;
  * @Date Create in 17:14 2017/11/30
  * @Modified By :
  **/
-public interface UtilResult {
+public class UtilResult {
 
     /**
      * 根据参数获取状态实体
      * @param resStatusEnum
      * @return
      */
-    static ResultStatus getResultStatus(ResStatusInterface resStatusEnum) {
+    public static ResultStatus getResultStatus(ResStatusInterface resStatusEnum) {
         ResultStatus resultStatus = new ResultStatus();
         resultStatus.setCode(resStatusEnum.getCode());
         resultStatus.setMsg(resStatusEnum.getMsg());
@@ -37,7 +36,7 @@ public interface UtilResult {
      * @param
      * @return
      */
-    static ResultStatus getFailStatus( ) {
+    public static ResultStatus getFailStatus( ) {
         ResultStatus resultStatus = new ResultStatus();
         resultStatus.setCode(BaseResEnum.COMMON_FAIL.getCode());
         resultStatus.setMsg(BaseResEnum.COMMON_FAIL.getMsg());
@@ -49,7 +48,7 @@ public interface UtilResult {
      * @param msg
      * @return
      */
-    static ResultStatus getFailStatus(String msg) {
+    public static ResultStatus getFailStatus(String msg) {
         ResultStatus resultStatus = new ResultStatus();
         resultStatus.setCode(BaseResEnum.COMMON_FAIL.getCode());
         resultStatus.setMsg(msg);
@@ -61,7 +60,7 @@ public interface UtilResult {
      * @param
      * @return
      */
-    static ResultStatus getSuccessStatus( ) {
+    public static ResultStatus getSuccessStatus( ) {
         ResultStatus resultStatus = new ResultStatus();
         resultStatus.setCode(BaseResEnum.COMMON_SUCCESS.getCode());
         resultStatus.setMsg(BaseResEnum.COMMON_SUCCESS.getMsg());
@@ -72,7 +71,7 @@ public interface UtilResult {
      * @param
      * @return
      */
-    static ResultStatus getSuccessStatus(String msg) {
+    public static ResultStatus getSuccessStatus(String msg) {
         ResultStatus resultStatus = new ResultStatus();
         resultStatus.setCode(BaseResEnum.COMMON_SUCCESS.getCode());
         resultStatus.setMsg(msg);
@@ -84,7 +83,7 @@ public interface UtilResult {
      * @param message
      * @return
      */
-    static ResultStatus getResultMessage(String code, String message) {
+    public static ResultStatus getResultMessage(String code, String message) {
         ResultStatus resultStatus = new ResultStatus();
         resultStatus.setCode(code);
         resultStatus.setMsg(message);
@@ -97,7 +96,7 @@ public interface UtilResult {
      * @param object
      * @return
      */
-    static <T> ResultData<T> getResultData(ResStatusInterface resStatusEnum, T object) {
+    public static <T> ResultData<T> getResultData(ResStatusInterface resStatusEnum, T object) {
         ResultData<T> resultObj = new ResultData();
         resultObj.setCode(resStatusEnum.getCode());
         resultObj.setMsg(resStatusEnum.getMsg());
@@ -110,7 +109,7 @@ public interface UtilResult {
      * @param object
      * @return
      */
-    static <T> ResultData<T> getResultSuccess (T object) {
+    public static <T> ResultData<T> getResultSuccess (T object) {
         ResultData<T> resultObj = new ResultData();
         resultObj.setCode(BaseResEnum.COMMON_SUCCESS.getCode());
         resultObj.setMsg(BaseResEnum.COMMON_SUCCESS.getMsg());
@@ -121,15 +120,13 @@ public interface UtilResult {
     /**
      * 获取pageInfo的参数实体
      * @param resStatusEnum
-     * @param list
      * @param pageInfo
      * @return
      */
-    static <T> ResultPage<T> getResultPageInfo(ResStatusInterface resStatusEnum, List<T> list, PageInfo pageInfo) {
+    public static <T> ResultPage<T> getResultPageInfo(ResStatusInterface resStatusEnum,PageInfo pageInfo) {
         ResultPage<T> resultPageInfo = new ResultPage();
         resultPageInfo.setCode(resStatusEnum.getCode());
         resultPageInfo.setMsg(resStatusEnum.getMsg());
-        resultPageInfo.setList(list);
         resultPageInfo.setPageInfo(pageInfo);
         return resultPageInfo;
     }
@@ -137,15 +134,13 @@ public interface UtilResult {
 
     /**
      * 获取pageInfo的参数实体
-     * @param list
      * @param pageInfo
      * @return
      */
-    static <T> ResultPage<T> getResultPageInfo(List<T> list, PageInfo pageInfo) {
+    public static <T> ResultPage<T> getResultPageInfo(PageInfo pageInfo) {
         ResultPage<T> resultPageInfo = new ResultPage();
         resultPageInfo.setCode(BaseResEnum.COMMON_SUCCESS.getCode());
         resultPageInfo.setMsg(BaseResEnum.COMMON_SUCCESS.getMsg());
-        resultPageInfo.setList(list);
         resultPageInfo.setPageInfo(pageInfo);
         return resultPageInfo;
     }
@@ -155,11 +150,17 @@ public interface UtilResult {
      * @param list
      * @return
      */
-    static <T> ResultPage<T> getResultPageInfo( List<T> list) {
+    public static <T> ResultPage<T> getResultPageInfo( List<T> list) {
         ResultPage<T> resultPageInfo = new ResultPage();
         resultPageInfo.setCode(BaseResEnum.COMMON_SUCCESS.getCode());
         resultPageInfo.setMsg(BaseResEnum.COMMON_SUCCESS.getMsg());
-        resultPageInfo.setList(list);
+        PageInfo<T> pageInfo = new PageInfo<>();
+        pageInfo.setPageSize(list.size());
+        pageInfo.setTotalPages(1);
+        pageInfo.setTotalRows(Long.valueOf(list.size()));
+        pageInfo.setPageNum(AppConstants.DEFAULT_PAGE_NUM);
+        pageInfo.setList(list);
+        resultPageInfo.setPageInfo(pageInfo);
         return resultPageInfo;
     }
 

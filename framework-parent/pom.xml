@@ -32,31 +32,11 @@
         <commons-collections4.version>4.4</commons-collections4.version>
         <hibernate-validator.version>6.2.3.Final</hibernate-validator.version>
         <framework.version>0.0.1-SNAPSHOT</framework.version>
+        <mysql-connector.version>8.0.29</mysql-connector.version>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
+        <hutool.version>5.8.0.M4</hutool.version>
+        <pagehelper.version>5.3.0</pagehelper.version>
     </properties>
-    <!-- <dependencies>
-         <dependency>
-             <groupId>org.springframework.boot</groupId>
-             <artifactId>spring-boot-starter-data-jpa</artifactId>
-         </dependency>
-         <dependency>
-             <groupId>org.springframework.boot</groupId>
-             <artifactId>spring-boot-starter-data-redis</artifactId>
-         </dependency>
-         <dependency>
-             <groupId>org.springframework.boot</groupId>
-             <artifactId>spring-boot-starter-security</artifactId>
-         </dependency>
-         <dependency>
-             <groupId>org.springframework.boot</groupId>
-             <artifactId>spring-boot-starter-web</artifactId>
-         </dependency>
-
-         <dependency>
-             <groupId>org.projectlombok</groupId>
-             <artifactId>lombok</artifactId>
-             <optional>true</optional>
-         </dependency>
-     </dependencies>-->
 
     <dependencyManagement>
         <dependencies>
@@ -134,6 +114,36 @@
                 <version>${hibernate-validator.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

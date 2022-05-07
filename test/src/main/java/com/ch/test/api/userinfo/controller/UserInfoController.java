@@ -32,6 +32,12 @@ public class UserInfoController extends BaseController {
         return UtilResult.getSuccessStatus();
     }
 
+    @PostMapping("save1")
+    public ResultStatus save1(@Valid @RequestBody UserInfoEntity info) {
+        userInfoService.saveInfo1(info);
+        return UtilResult.getSuccessStatus();
+    }
+
 
     @PostMapping("info/{id}")
     public ResultStatus getInfo(@PathVariable Long id) {

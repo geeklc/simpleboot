@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
 @Configuration
 @Slf4j
 @ConditionalOnProperty(prefix = AppDaoProperties.PREFIX, name = "dataSource.enabled", havingValue = "true")
+@EnableTransactionManagement
 public class DataSourceConfig {
     @Autowired
     private AppDaoProperties properties;

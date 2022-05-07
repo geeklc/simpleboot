@@ -1,6 +1,7 @@
 package com.ch.test.api.userinfo.service.impl;
 
 import com.ch.common.base.AppBaseParams;
+import com.ch.common.exception.AppException;
 import com.ch.test.api.userinfo.bean.UserInfoEntity;
 import com.ch.test.api.userinfo.mapper.UserInfoMapper;
 import com.ch.test.api.userinfo.service.IUserInfoService;
@@ -8,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,13 @@ public class UserInfoServiceImpl implements IUserInfoService {
     @Override
     public void saveInfo(UserInfoEntity info) {
         userInfoMapper.insert(info);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void saveInfo1(UserInfoEntity info) {
+        userInfoMapper.insert(info);
+        throw new AppException("1", "手动异常");
     }
 
     @Override

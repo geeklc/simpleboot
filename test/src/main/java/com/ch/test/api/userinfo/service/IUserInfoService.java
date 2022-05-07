@@ -39,6 +39,13 @@ public interface IUserInfoService {
     void saveInfo(UserInfoEntity info);
 
     /**
+     * 保存信息
+     *
+     * @param info
+     */
+    void saveInfo1(UserInfoEntity info);
+
+    /**
      * 修改信息
      *
      * @param info
